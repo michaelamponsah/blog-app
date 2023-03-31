@@ -8,6 +8,8 @@ class Post < ApplicationRecord
     author.update(posts_count: Post.where(author_id).count)
   end
 
+  private
+
   def get_recent_comments(limit_count = 5)
     comments.order(created_at: :desc).limit(limit_count)
   end
