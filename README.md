@@ -115,7 +115,7 @@ run tests with the command:
 
 
 ```sh
-  rspec spec
+  rspec spec/requests
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
