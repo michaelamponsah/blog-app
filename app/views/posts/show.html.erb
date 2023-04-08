@@ -20,7 +20,7 @@
   <div class="comments-container">
   Comments: 
     <div class="flex-column">
-    <% @comments.each do |comment| %>
+    <% @recent_comments.each do |comment| %>
       <span><%= comment.author.name %> : <%= comment.text %></span> 
     <% end %> 
     </div>
