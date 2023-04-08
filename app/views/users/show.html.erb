@@ -1,1 +1,31 @@
-<h1>Single user resource</h1>
+<article class="user-container">    
+        <section class="user">
+          <img class="image" src="<%=@user.photo %>" alt="User Avatar" />
+          <div class="user-info">
+            <h2 class="user-name"><%= @user.name %></h2>
+            <p class="post-count">Number of posts: <%= @user.posts_counter%> </p>
+          </div>
+        </section>
+        
+        <section class="Bio">
+          <div class = "flex-column">
+            <h3 class="fs-3">Bio :</h3>  
+            <p><%= @user.bio %></p>
+          </div>
+        </section>
+
+        <section class="posts-container">
+            <% @user.get_recent_posts.each_with_index do |post,index| %>
+              <a class="flex-column posts td-none" href="<%= @user.id%>/posts/<%=post.id%>">
+                <h3 class="fs-3">Post #<%= index+1 %></h3> 
+                 <p> <%= post.title %> </p>
+                 <div class="flex-row-end td-none">
+                  <p>Comments: <%= post.comments_counter %> </p>
+                  <p>Likes: <%= post.likes_counter %> </p>
+                 </div>
+              </a>
+            <% end %>
+        </section>
+
+        <a class="td-none flex-row-middle button"  href="<%=@user.id%>/posts">See all posts</a>
+</article>
