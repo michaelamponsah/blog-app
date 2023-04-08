@@ -24,7 +24,7 @@
       <div class="comments-container">
         Comments: 
           <div class="flex-column">
-          <% post.comments.each do |comment| %>
+          <% post.recent_comments.each do |comment| %>
             <span><%= comment.author.name %> : <%= comment.text %></span> 
           <% end %> 
           </div>
