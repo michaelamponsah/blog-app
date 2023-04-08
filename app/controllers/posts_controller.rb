@@ -10,4 +10,29 @@ class PostsController < ApplicationController
     @recent_comments = @post.get_recent_comments
     @likes = @post.likes
   end
+
+  def new
+    @user = current_user(params[:user_id])
+    @post = Post.new
+  end
+
+  def create
+    @user = current_user(params[:user_id])
+    @post = @user.posts.new(author: @user, title: params[:post][:title], text: params[:post][:text])
+    if @post.save
+      @post.update_posts_counter
+      flash[:notice] = 'Your post was created successfully'
+      redirect_to user_post_path(@user, @post)
+    else
+      render :new
+      flash.alert = 'sorry, something went wrong!'
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :text)
+  end
+
 end
