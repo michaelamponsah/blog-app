@@ -9,7 +9,7 @@
   </section>
 
   <section class="posts-container">
-    <%= @puser.get_recent_posts.each_with_index do |post,index| %>
+    <%= @users.get_recent_posts.each_with_index do |post,index| %>
       <section class="post-comment-container">
       <a class="flex-column posts td-none" href="posts/<%=post.id%>">
         <h3 class="fs-3" >Post #<%= index+1 %></h3>
@@ -24,7 +24,7 @@
       <div class="comments-container">
         Comments: 
           <div class="flex-column">
-          <% post.recent_comments.each do |comment| %>
+          <% post.get_recent_comments.each do |comment| %>
             <span><%= comment.author.name %> : <%= comment.text %></span> 
           <% end %> 
           </div>
