@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe 'Posts', type: :system do
   describe 'Posts show page' do
     before(:each) do
