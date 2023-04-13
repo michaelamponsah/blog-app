@@ -5,14 +5,14 @@ RSpec.describe 'Posts', type: :system do
     before(:each) do
       @user = User.create(name: 'Kenny',
                           photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                          Bio: 'I am Rails developer',
+                          Bio: 'I am  a SRails developer',
                           posts_counter: 3)
       @user2 = User.create(name: 'Bee',
                            photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                           Bio: 'I am Rails developer',
+                           Bio: 'I am a Rails developer',
                            posts_counter: 4)
       @first_post = Post.create(author: @user, title: 'My first post', text: 'This is my first post')
-      Comment.create(post: @first_post, author: @user2, text: 'This the first post comment')
+      Comment.create(post: @first_post, author: @user2, text: 'This is the first post comment')
       visit user_post_path(@user, @first_post)
     end
     it 'I can see the post title' do
