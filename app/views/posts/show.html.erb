@@ -13,11 +13,10 @@
       <h2><%= @post.title %></h2>
     </div>
 
-     <%= form_with model: [@post, @like], url: create_post_like_path  do |form| %>
-      <div class="mb-4 flex flex-col">
-        <%= form.submit "Like 👍" , class: "likes" %>
-      </div>
-    <% end %>
+    <p>
+      <%= @post.text %>
+    </p>
+    
   
   </section>
 
