@@ -17,11 +17,20 @@
       <%= @post.text %>
     </p>
     
-  
   </section>
 
-  <section>
+<div>
+  <p>Add a comment</p>
+  <%= form_with model: @comment, url: "/comments/#{@post.id}" do |form| %>
+    <div>
+      <%= form.label :comment %>
+      <%= form.text_area :text, required: true %>
+    </div>
+    <%= form.submit "Submit" %>
+  <% end %>
+<div>
 
+  <section>
   <div class="comments-container">
   Comments: 
     <div class="flex-column">
