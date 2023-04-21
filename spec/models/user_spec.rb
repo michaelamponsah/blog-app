@@ -23,9 +23,15 @@ RSpec.describe User, type: :model do
     end
   end
   describe 'recent_posts' do
-    let!(:post1) { Post.create(title: 'Post 1', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0) }
-    let!(:post2) { Post.create(title: 'Post 2', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0) }
-    let!(:post3) { Post.create(title: 'Post 3', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0) }
+    let!(:post1) do
+      Post.create(title: 'Post 1', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
+    end
+    let!(:post2) do
+      Post.create(title: 'Post 2', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
+    end
+    let!(:post3) do
+      Post.create(title: 'Post 3', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
+    end
     let!(:post4) { Post.create(author: @user) }
 
     it 'should return the specified number of posts' do

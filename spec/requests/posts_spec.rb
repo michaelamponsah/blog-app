@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
   describe 'GET /index' do
-    before(:example)  do
+    before(:example) do
       get '/users/:user_id/posts'
     end
 
