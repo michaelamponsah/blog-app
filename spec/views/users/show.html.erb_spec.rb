@@ -18,11 +18,11 @@ RSpec.describe 'users/index', type: :feature do
 
     @first_user = User.first
 
-    @post1 = Post.create(author: @first_user, title: 'Hello', text: 'This is my second test post',
+    @post1 = Post.create(author: @first_user, title: 'Post It', text: 'Post 1',
                          comments_counter: 2, likes_counter: 6)
-    @post2 = Post.create(author: @first_user, title: 'My second post',
-                         text: 'Yeah, this is a new post for the first user', comments_counter: 0, likes_counter: 3)
-    @post3 = Post.create(author: @first_user, title: 'My third post', text: 'Added a new post', comments_counter: 4,
+    @post2 = Post.create(author: @first_user, title: 'Another random post',
+                         text: 'Some post', comments_counter: 0, likes_counter: 3)
+    @post3 = Post.create(author: @first_user, title: 'Post 3', text: 'A new post', comments_counter: 4,
                          likes_counter: 1)
 
     visit user_path(@first_user)
@@ -45,14 +45,14 @@ RSpec.describe 'users/index', type: :feature do
     expect(page).to have_content(@first_user.bio)
   end
 
-  it 'shows the users first three post' do
-    expect(page).to have_content(@post1.text)
-    expect(page).to have_content(@post2.text)
-    expect(page).to have_content(@post3.text)
+  it 'shows the users first three posts' do
+    expect(page).to have_content(@post1.title)
+    expect(page).to have_content(@post2.title)
+    expect(page).to have_content(@post3.title)
   end
 
   it 'shows a button to view all users posts' do
-    expect(page).to have_content('See All Posts')
+    expect(page).to have_content('See all posts')
   end
 
   it 'redirects to the posts show page when I click on a user' do
@@ -62,7 +62,7 @@ RSpec.describe 'users/index', type: :feature do
   end
 
   it 'redirects to the posts show page when I click on a user' do
-    click_link 'See All Posts'
+    click_link 'See all posts'
     expect(current_path).to match user_posts_path(@first_user)
   end
 end
