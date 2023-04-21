@@ -32,4 +32,15 @@ RSpec.describe 'posts/index', type: :feature do
   it 'shows the first comments on the post' do
     expect(page).to have_content(@first_comment.text)
   end
+  
+    it 'shows the number of comments on the post' do
+    expect(page).to have_content('Comments: 1')
+  end
+  it 'shows the number of likes on the post' do
+    expect(page).to have_content('Likes: 1')
+  end
+  it 'when clicking on a author\'s title, it redirects to the post\'s show page' do
+    click_on @first_post.title
+    expect(page).to have_content(@first_post.title)
+  end
 end
