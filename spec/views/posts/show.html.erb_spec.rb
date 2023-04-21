@@ -7,7 +7,8 @@ RSpec.describe 'posts/show', type: :feature do
 
     visit root_path
 
-    @first_post = Post.create(author: @author, title: 'Dan Post #1', text: "This is Dan's first post", comments_counter: 0, likes_counter: 0)
+    @first_post = Post.create(author: @author, title: 'Dan Post #1', text: "This is Dan's first post",
+                              comments_counter: 0, likes_counter: 0)
     @second_post = Post.create(author: @author, title: 'Dan Post #2', text: "This is Dan's second post")
 
     @first_comment = Comment.create(post: @first_post, author: @author, text: 'First comment for Dan')
