@@ -1,27 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe '/posts', type: :request do
-  describe 'Get/index' do
+RSpec.describe 'Posts', type: :request do
+  describe 'GET /index' do
     before(:example) do
-      get '/users/1/posts'
+      get '/users/:user_id/posts'
     end
-    it 'Displays a successful response' do
-      expect(response).to be_successful
+
+    it 'Returns http success' do
+      expect(response).to have_http_status(:ok)
     end
+
     it 'Displays the correct template' do
       expect(response).to render_template(:index)
     end
+
     it 'Contains the correct text' do
-      expect(response.body).to include('Posts of a single user')
+      expect(response.body).to include('user posts')
     end
   end
 
-  describe 'Get/show' do
+  describe 'Get /show' do
     before(:example) do
-      get '/users/1/posts/1'
+      get '/users/:user_id/posts/:post_id'
     end
     it 'Displays a successful response' do
-      expect(response).to be_successful
+      expect(response).to have_http_status(:ok)
     end
     it 'Displays the correct template' do
       expect(response).to render_template(:show)

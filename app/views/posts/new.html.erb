@@ -1,21 +1,14 @@
 <section>
   <h2>New Post</h2>
-  <% if @post.errors.any? %>
+  <%= form_with model: @post, url: posts_new_path do |form| %>
     <div>
-      <% @post.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
-      <% end %>
-    </div>
-  <% end %>
-  <%= form_with model: @post, url: user_posts_path(@user) do |form| %>
-    <div>
-      <%= form.label :title, class: "" %>
-      <%= form.text_field :title, required: true, autofocus: true, class: "" %>
+       <%= form.label :title %>
+       <%= form.text_field :title, required: true %>
     </div>
     <div>
-      <%= form.label :text, class: "form-label" %>
-      <%= form.text_area :text, required: true, autofocus: true, class: "" %>
+      <%= form.label :text %>
+      <%= form.text_area :text, required: true %>
     </div>
-    <%= form.submit "submit", class: "" %>
+    <%= form.submit "Submit" %>
   <% end %>
 </section>

@@ -3,43 +3,43 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   before do
     @user = User.create(name: 'John Doe', photo: 'photo url', bio: 'Awesome bio', posts_counter: 0)
-    @post = Post.create(Title: 'Awesome Title', Text: 'Post body', author: @user, CommentsCounter: 0, LikesCounter: 0)
+    @post = Post.create(title: 'Awesome Title', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
   end
 
   describe 'validations' do
     it 'should require a Title' do
-      post = Post.new(Text: 'Post body', author: @user)
+      post = Post.new(text: 'Post body', author: @user)
       expect(post.valid?).to eq(false)
-      expect(post.errors[:Title].any?).to eq(true)
+      expect(post.errors[:title].any?).to eq(true)
     end
 
     it 'should require a non-empty Title' do
-      post = Post.new(Title: '', Text: 'Post body', author: @user)
+      post = Post.new(title: '', text: 'Post body', author: @user)
       expect(post.valid?).to eq(false)
-      expect(post.errors[:Title].any?).to eq(true)
+      expect(post.errors[:title].any?).to eq(true)
     end
 
     it 'should allow valid attributes' do
-      post = Post.new(Title: 'My post', Text: 'Post body', author: @user, CommentsCounter: 0, LikesCounter: 0)
+      post = Post.new(title: 'My post', text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
       expect(post.valid?).to eq(true)
     end
 
-    it 'should validate the CommentsCounter attribute' do
-      post = Post.new(Title: 'My post', Text: 'Post body', author: @user, CommentsCounter: -1, LikesCounter: 0)
+    it 'should validate the comments_counter attribute' do
+      post = Post.new(title: 'My post', text: 'Post body', author: @user, comments_counter: -1, likes_counter: 0)
       expect(post.valid?).to eq(false)
-      expect(post.errors[:CommentsCounter].any?).to eq(true)
+      expect(post.errors[:comments_counter].any?).to eq(true)
     end
 
     it 'should validate the LikesCounter attribute' do
-      post = Post.new(Title: 'My post', Text: 'Post body', author: @user, CommentsCounter: 0, LikesCounter: -1)
+      post = Post.new(title: 'My post', text: 'Post body', author: @user, comments_counter: 0, likes_counter: -1)
       expect(post.valid?).to eq(false)
-      expect(post.errors[:LikesCounter].any?).to eq(true)
+      expect(post.errors[:likes_counter].any?).to eq(true)
     end
 
     it 'does not allow title to exceed maximum length' do
-      post = Post.new(Title: 'a' * 251, Text: 'Post body', author: @user, CommentsCounter: 0, LikesCounter: 0)
+      post = Post.new(title: 'a' * 251, text: 'Post body', author: @user, comments_counter: 0, likes_counter: 0)
       expect(post).not_to be_valid
-      expect(post.errors[:Title]).to include('is too long (maximum is 250 characters)')
+      expect(post.errors[:title]).to include('is too long (maximum is 250 characters)')
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe Post, type: :model do
       comment4
       comment5
       comment6
-      expect(post.recent_comments(5).count).to eq(5)
+      expect(post.get_recent_comments(5).count).to eq(5)
     end
   end
 end
