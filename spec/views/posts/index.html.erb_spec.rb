@@ -19,4 +19,17 @@ RSpec.describe 'posts/index', type: :feature do
   it 'displays the user\'s name' do
     expect(page).to have_content(@author.name)
   end
+  
+  it 'shows number of posts' do
+    expect(page).to have_content('Number of posts: 2')
+  end
+  it 'shows the post title' do
+    expect(page).to have_content(@first_post.title)
+  end
+  # it 'shows the post text' do
+  #   expect(page).to have_content("This is Dan's first post")
+  # end
+  it 'shows the first comments on the post' do
+    expect(page).to have_content(@first_comment.text)
+  end
 end
