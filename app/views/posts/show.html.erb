@@ -1,45 +1,48 @@
-<article>
+<h1 class="mb-3">Single post to a given user</h1>
 
-  <section class="container-post-id">
-    <div class="dflex-saround">
-      <h3>Post # <%= @post.id %> by <%= @post.author.name %><h3>
+<section>
+  <div class="border border-5 mx-auto w-100 p-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center p3">
+      <h2>
+      <%= @post.title %> <strong>by</strong> <%= @post.author.name %>
+      </h2>
       <div>
         <span>Comments: <%= @post.comments_counter %></span>
-        <span>Likes: <%= @post.likes_counter %></span>
+        <span>, Likes: <%= @post.likes_counter %></span>
       </div>
     </div>
 
-    <div class="post-title-id">
-      <h2><%= @post.title %></h2>
-    </div>
-
-    <p>
-      <%= @post.text %>
-    </p>
-    
-  </section>
-
-<div>
-  <p>Add a comment</p>
-  <%= form_with model: @comment, url: "/comments/#{@post.id}" do |form| %>
     <div>
-      <%= form.label :comment %>
-      <%= form.text_area :text, required: true %>
+      <p> <%= @post.text %></p>
     </div>
-    <%= form.submit "Submit" %>
-  <% end %>
-<div>
+    <div>
+      <% if @user.id == current_user.id %>
+      <%= button_to "Delete Post", user_post_path, method: :delete, class: "btn btn-outline-secondary" %>
+      <% end %>
+  </div>
+  </div>
+  
 
-  <section>
-  <div class="comments-container">
-  Comments: 
-    <div class="flex-column">
-    <% @recent_comments.each do |comment| %>
-      <span><%= comment.author.name %> : <%= comment.text %></span> 
-    <% end %> 
-    </div>
-</div>
-  </section>
+  <div class="border border-5 p-3">
+    <h3>Comments:</h3>
+    <% @post_comments.each do |comment| %>
+      <div class=" mb-3 p-3">
+      <span><strong><%= comment.author.name %></strong>:</span>
+      <span><%= comment.text %></span>
+      </div>
+      <% if @user.id == current_user.id %>
+      <%= button_to "Delete Comment", user_post_comment_path(@user, @post, comment), method: :delete, class: "btn btn-outline-secondary" %>
+      <% end %>
+    <% end %>
+  </div>
 
-
-</article>
+  <div>
+    <h3>Add a comment: </h3>
+      <%= form_with model: @comment, url: user_post_comments_path(post_id: @post) do |form| %>
+      <div>
+        <%= form.text_area :text, placeholder: "Add comment", class: "form-control"%>
+      </div>
+      <%= form.submit "Add Comment", class: "btn btn-outline-secondary m-2" %>
+    <% end %>
+  </div>
+</section>
