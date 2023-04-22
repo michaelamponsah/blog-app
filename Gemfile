@@ -77,5 +77,5 @@ group :test do
 end
 
 gem 'devise'
-
 gem 'jwt'
+gem 'cancancan'
