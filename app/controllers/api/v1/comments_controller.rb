@@ -1,24 +1,31 @@
-class Api::V1::CommentsController < ApplicationController
-  skip_before_action :authenticate_user!
+class Api::V1::CommentsController < Api::V1::ApplicationController
+  load_and_authorize_resource
+  before_action :find_post_params, only: %i[index create]
 
   def index
-    post = Post.find(params[:post_id])
-    comments = post.comments
-    render json: comments
+    if @post
+      @comments = Comment.where(post_id: params[:post_id])
+      render json: @comments
+    else
+      render json: { status: 'Failure', error: 'Post Not Found' }
+    end
   end
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.author = User.find(params[:user_id])
-    @comment.post = Post.find(params[:post_id])
+    @comment.author = @auth_user
+    @comment.post = @post
+
     if @comment.save
-      render json: { status: 'Success', data: @comment }
+      render json: { status: 'Success', comment: @comment }
     else
-      render json: { status: 'Failure', error: @comment.errors.full_messages }
+      render json: { status: 'Failure', error: 'Comment Not Created' }
     end
   end
 
-  private
+  def find_post_params
+    @post = Post.find_by_id(params[:post_id])
+  end
 
   def comment_params
     params.require(:comment).permit(:text)
